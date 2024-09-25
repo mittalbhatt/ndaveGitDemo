@@ -1,47 +1,5 @@
 
 
-BUIC Bundle Using Custom Webpack
-
-• Description: Best for optimizing large Angular applications with specific build needs.
-
-Key Steps:
-
-• Install Webpack dependencies manually
-
-• Configure Custom Webpack in the application
-
-• Create webpack.config.js file for customization
-
-• Add Webpack to angular.json
-
-• Set configurations for:
-
-• Polyfills
-
-• Jenkins
-
-• Linting
-
-• Local environment setup (20 steps total)
 
 
-Element Bundle Approach
-
-• Description: Focuses on creating reusable custom elements (web components) for any web application.
-
-Key Steps:
-
-• Install Angular Elements dependencies
-
-• Modify angular.json to configure output for Angular Elements
-
-• Create custom elements configurations for the build (6-7 steps)
-
-
-
-
-
-
-
-
-
+"Our current approach for upgrading BUIC from Angular 2 to 10 or 16 involves three main steps: First, developers need to install Angular dependencies to generate the basic BUIC schema. Second, to generate the minified or compressed bundle file, we rely on a Webpack approach where developers have to install Webpack dependencies manually and customize Angular common files, following ETP standards. This process involves around 20 steps. Third, for making BUIC a reusable component, we use Angular Elements, requiring additional dependencies and customization. On top of that, developers manually configure Husky checkmarks and Content Security Policy (CSP). To streamline this process and reduce manual efforts, we created an automation script that integrates all these approaches into a single, automated workflow, making the process much more efficient for developers.
