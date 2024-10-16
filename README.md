@@ -1,48 +1,22 @@
 const fs = require('fs');
-const readline = require('readline');
+const path = require('path');
 
-// Function to read file and replace text
-async function replaceInFile(filePath, searchValue, replaceValue) {
-  try {
-    // Read the file content
-    const data = fs.readFileSync(filePath, 'utf8');
+// Get the user input for `buicname` dynamically (assuming it's passed as input)
+const userInputBuicname = 'sw_accountservices'; // Replace this with actual user input
 
-    // Replace all occurrences of searchValue with replaceValue
-    const result = data.replace(new RegExp(searchValue, 'g'), replaceValue);
+// Define the old filename and the new filename
+const directoryPath = path.join(__dirname, 'files'); // Path to the files directory
+const oldFileName = `buicname-element.module.ts`;    // Existing file name
+const newFileName = `${userInputBuicname}-element.module.ts`; // New file name with user input
 
-    // Write the modified content back to the file
-    fs.writeFileSync(filePath, result, 'utf8');
+// Full path for the old and new files
+const oldFilePath = path.join(directoryPath, oldFileName);
+const newFilePath = path.join(directoryPath, newFileName);
 
-    console.log(`Replaced "${searchValue}" with "${replaceValue}" in ${filePath}`);
-  } catch (err) {
-    console.error(`Error reading or writing file: ${err}`);
-  }
-}
-
-// Function to prompt user for input
-async function promptUser(query) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise((resolve) => rl.question(query, (answer) => {
-    rl.close();
-    resolve(answer);
-  }));
-}
-
-// Main function to run the script
-async function main() {
-  // Get the BUIC name from the user
-  const buicName = await promptUser('Enter the BUIC name: ');
-
-  // Path to the angular.json file
-  const filePath = './files/angular.json';
-
-  // Replace the specified text in the file
-  replaceInFile(filePath, 'cct-synergyweb-powerofattorney', buicName);
-}
-
-// Run the main function
-main();
+// Rename the file
+fs.rename(oldFilePath, newFilePath, (err) => {
+    if (err) {
+        return console.error('Error renaming file:', err);
+    }
+    console.log(`File renamed from ${oldFileName} to ${newFileName}`);
+});
